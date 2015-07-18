@@ -1,9 +1,18 @@
-The dataset used is -> Human Activity Recognition Using Smartphones
+Intro
 
-Files
+The script run_analysis.Rperforms the 5 steps described in the course project's definition.
 
-The script takes all data in the same folder.
+First, all the similar data is merged using the rbind() function. By similar, we address those files having the same number of columns and referring to the same entities.
+Then, only those columns with the mean and standard deviation measures are taken from the whole dataset. After extracting these columns, they are given the correct names, taken from features.txt.
+As activity data is addressed with values 1:6, we take the activity names and IDs from activity_labels.txt and they are substituted in the dataset.
+On the whole dataset, those columns with vague column names are corrected.
+Finally, we generate a new dataset with all the average measures for each subject and activity type (30 subjects * 6 activities = 180 rows). The output file is called averages_data.txt, and uploaded to this repository.
 
-CodeBook.md -> file that have detail about the variables, the data, and any manipulation done to clean up the data.
-run_analysis.R -> The R script
-averages_data.txt -> The output file
+Variables
+
+Downloaded files are stored in x_training, y_training, x_testing, y_testing, subject_training and subject_testing.
+Then the merge of previous datasets is stored in x_data, y_data and subject_data.
+features contains the correct names for the x_data dataset, which are applied to the column names stored in mean_and_std_feat, a numeric vector used to extract the desired data.
+Same is done with activity names through the activities variable.
+In all_data x_data, y_data and subject_data is merged in a big dataset.
+Variable averages_data contains the relevant averages which will be later stored in a .txt file. ddply() from the plyr package is used to apply colMeans() and ease the development.
